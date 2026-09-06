@@ -1,6 +1,12 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  device,
+  ...
+}:
 let
   kmsconTty = "1";
+  fontSize = if device == "asahi" then 18 else 16;
 in
 {
   services.displayManager.ly = {
@@ -26,8 +32,6 @@ in
 
   environment.systemPackages = [ pkgs.ly ];
 
-  fonts.packages = [ pkgs.unscii ];
-
   services.kmscon = {
     enable = true;
   };
@@ -46,7 +50,7 @@ in
     serviceConfig = {
       ExecStart = lib.mkForce [
         ""
-        "${pkgs.kmscon}/bin/kmscon --vt=tty${kmsconTty} --font-engine=freetype --font-name=unscii-16 --login -- ${pkgs.ly}/bin/ly --use-kmscon-vt"
+        "${pkgs.kmscon}/bin/kmscon --vt=tty${kmsconTty} --font-engine=freetype --font-size=${toString fontSize} --login -- ${pkgs.ly}/bin/ly --use-kmscon-vt"
       ];
     };
   };

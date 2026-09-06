@@ -12,6 +12,9 @@
       signByDefault = true;
     };
 
-    ignores = [ ".DS_Store" "._.DS_Store" ];
+    ignores = [
+      ".DS_Store"
+      "._.DS_Store"
+    ];
   };
 }

@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, username, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}:
 let
   crossPkgs = import pkgs.path {
     localSystem = "x86_64-linux";
@@ -18,7 +24,10 @@ in
       sshKey = "/home/${username}/.ssh/id_ed25519";
       maxJobs = 16;
       speedFactor = 4;
-      supportedFeatures = [ "big-parallel" "kvm" ];
+      supportedFeatures = [
+        "big-parallel"
+        "kvm"
+      ];
     }
   ];
 

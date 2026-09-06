@@ -17,7 +17,8 @@ let
     alsa-lib
     libpulseaudio
   ];
-in {
+in
+{
   idea = super.symlinkJoin {
     name = "idea-with-gl";
     paths = [ idea-pkg ];

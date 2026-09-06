@@ -79,11 +79,14 @@ in
     config.allowUnfree = true;
   };
 
-  nixpkgs.overlays = [ ] ++
-    (if device != "macbook" then
-      [
-        (import apps/overlays/idea.nix)
-      ]
-    else
-      [ ]);
+  nixpkgs.overlays =
+    [ ]
+    ++ (
+      if device != "macbook" then
+        [
+          (import apps/overlays/idea.nix)
+        ]
+      else
+        [ ]
+    );
 }

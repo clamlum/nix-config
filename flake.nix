@@ -86,9 +86,9 @@
           };
 
         asahi =
-        let
-          device = "asahi";
-        in
+          let
+            device = "asahi";
+          in
           mkSystem {
             system = "aarch64-linux";
             specialArgs = {

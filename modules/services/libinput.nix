@@ -23,10 +23,10 @@
   '';
 
   environment.etc."libinput/plugins/00-disable-debounce.lua".text = ''
-  libinput:register({1})
+    libinput:register({1})
 
-  libinput:connect("new-evdev-device", function(device)
-    device:disable_feature("button-debouncing")
-  end)
+    libinput:connect("new-evdev-device", function(device)
+      device:disable_feature("button-debouncing")
+    end)
   '';
 }

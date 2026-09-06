@@ -1,4 +1,9 @@
-{ pkgs, lib, username, ... }:
+{
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 let
   asrockControllerSrc = pkgs.fetchFromGitHub {
     owner = "VirulentArc";
@@ -27,7 +32,7 @@ in
     SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
   '';
 
-  users.groups.i2c = {};
+  users.groups.i2c = { };
   users.users.${username}.extraGroups = [ "i2c" ];
 
 }
