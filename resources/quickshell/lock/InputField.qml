@@ -152,6 +152,13 @@ Item {
                 event.accepted = true
             }
 
+            onTextChanged: {
+                if (root.failed && text.length > 0) {
+                    failResetTimer.stop()
+                    root.failed = false
+                }
+            }
+
             onAccepted: {
                 root.failed = false
                 root.lockContext.tryUnlock(text)

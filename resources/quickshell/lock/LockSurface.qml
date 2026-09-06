@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
-import "../"
-import "../bar/modules"
 
 WlSessionLockSurface {
     id: root
