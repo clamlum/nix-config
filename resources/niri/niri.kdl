@@ -25,7 +25,7 @@ input {
 
     warp-mouse-to-focus
 
-    focus-follows-mouse max-scroll-amount="100%"
+    // focus-follows-mouse max-scroll-amount="100%"
 }
 
 output "DP-3" {
