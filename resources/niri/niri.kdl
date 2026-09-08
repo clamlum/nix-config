@@ -39,13 +39,13 @@ output "DP-3" {
 }
 
 output "DP-1" {
-    mode "1920x1080@300.002"
+    mode "2560x1440@500"
 
-    scale 1
+    scale 1.30
 
     transform "normal"
 
-    position x=0 y=150
+    position x=0 y=0
 }
 
 output "eDP-1" {
