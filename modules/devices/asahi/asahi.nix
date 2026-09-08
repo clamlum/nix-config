@@ -54,4 +54,8 @@
       RUN+="${pkgs.coreutils}/bin/chown root:video /sys/class/leds/%k/brightness", \
       RUN+="${pkgs.coreutils}/bin/chmod 777 /sys/class/leds/%k/brightness"
   '';
+
+  programs.virt-manager.enable = true;
+
+  programs.moonlight-qt.enable = true;
 }
