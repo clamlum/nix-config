@@ -3,6 +3,7 @@
 {
   programs.plasma = {
     enable = true;
+    overrideConfig = true;
     shortcuts = {
       ActivityManager.switch-to-activity-a63bb97e-770b-4321-8b69-f3d2e4ed41b9 = [ ];
       "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = [ ];

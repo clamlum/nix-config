@@ -6,6 +6,8 @@
     package = pkgs.niri;
   };
 
+  services.displayManager.defaultSession = lib.mkForce "niri";
+
   environment.systemPackages = [
     pkgs.swaybg
     pkgs.wtype
