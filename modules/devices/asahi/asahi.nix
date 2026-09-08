@@ -30,6 +30,7 @@
     pkgs.brightnessctl
     pkgs.btop
     pkgs.distrobox
+    pkgs.cifs-utils
   ];
 
   services.upower.enable = true;
@@ -58,4 +59,20 @@
   programs.virt-manager.enable = true;
 
   programs.moonlight-qt.enable = true;
+
+  fileSystems."/mnt/music" = {
+    device = "//host.media.local/music";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/secrets/smb"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.mount-timeout=5"
+      "soft"
+      "uid=1000"
+      "gid=100"
+      "file_mode=0755"
+      "dir_mode=0755"
+    ];
+  };
 }
