@@ -6,8 +6,16 @@ Item {
     id: root
     implicitHeight: Theme.barHeight
 
-    readonly property string title: Services.Mpris.title
-    readonly property string artist: Services.Mpris.artist
+    property int maxTitleLength: 60
+    property int maxArtistLength: 60
+
+    function _clip(s, max) {
+        const str = (s || "").toString();
+        return max > 0 && str.length > max ? str.slice(0, max - 1) + "…" : str;
+    }
+
+    readonly property string title: _clip(Services.Mpris.title, maxTitleLength)
+    readonly property string artist: _clip(Services.Mpris.artist, maxArtistLength)
 
     readonly property string trackText: title && artist ? (title + " - " + artist) : (title || artist || "")
 

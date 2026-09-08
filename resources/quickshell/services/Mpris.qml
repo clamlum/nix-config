@@ -7,8 +7,6 @@ Singleton {
     id: root
 
     property var preferredPlayers: ["kopuz", "helium"]
-    property int maxTitleLength: 80
-    property int maxArtistLength: 80
 
     property var playerList: Mpris.players ? Mpris.players.values : []
 
@@ -34,14 +32,9 @@ Singleton {
         return list.find(pl => isPlaying(pl)) || list[0] || null;
     }
 
-    function _clip(s, max) {
-        const str = (s || "").toString();
-        return max > 0 && str.length > max ? str.slice(0, max - 1) + "…" : str;
-    }
-
-    readonly property string title: _clip(player?.trackTitle || "", maxTitleLength)
-    readonly property string artist: _clip(player?.trackArtist || "", maxArtistLength)
-    readonly property string album: _clip(player?.trackAlbum || "", maxArtistLength)
+    readonly property string title: (player?.trackTitle || "").toString()
+    readonly property string artist: (player?.trackArtist || "").toString()
+    readonly property string album: (player?.trackAlbum || "").toString()
     readonly property bool active: !!player && player.playbackState !== MprisPlaybackState.Stopped
     readonly property string identity: (player?.identity || "").toString()
     readonly property string icon: {
