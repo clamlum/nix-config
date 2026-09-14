@@ -33,7 +33,7 @@ in
 
     settings = {
       main = {
-        font = "DejaVuSansM Nerd Font Mono:size=12";
+        font = "JetBrainsMono Nerd Font:size=12";
         dpi-aware = "yes";
         prompt = "❯ ";
         placeholder = "Type to search…";
