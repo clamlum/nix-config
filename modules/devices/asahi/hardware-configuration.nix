@@ -13,31 +13,31 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/659b082e-de60-4be0-96b6-c6d22078befe";
     fsType = "btrfs";
-    options = [ "subvol=@" ];
+    options = [ "subvol=@" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/659b082e-de60-4be0-96b6-c6d22078befe";
     fsType = "btrfs";
-    options = [ "subvol=@home" ];
+    options = [ "subvol=@home" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/659b082e-de60-4be0-96b6-c6d22078befe";
     fsType = "btrfs";
-    options = [ "subvol=@nix" ];
+    options = [ "subvol=@nix" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/659b082e-de60-4be0-96b6-c6d22078befe";
     fsType = "btrfs";
-    options = [ "subvol=@log" ];
+    options = [ "subvol=@log" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/.snapshots" = {
     device = "/dev/disk/by-uuid/659b082e-de60-4be0-96b6-c6d22078befe";
     fsType = "btrfs";
-    options = [ "subvol=@snapshots" ];
+    options = [ "subvol=@snapshots" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/.swapvol" = {
