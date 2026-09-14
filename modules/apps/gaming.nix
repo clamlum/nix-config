@@ -29,6 +29,9 @@ in
 
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    enableWsi = true;
+    capSysNice = false;
   };
+
+  programs.firejail.enable = true;
 }
