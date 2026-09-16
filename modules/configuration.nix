@@ -21,6 +21,10 @@
     Host media
       HostName 192.168.2.10
       User root
+
+    Host host
+      HostName 192.168.2.20
+      User root
   '';
   programs.ssh.knownHosts = {
     pc = {
@@ -43,6 +47,13 @@
         "192.168.2.10"
       ];
       publicKey = "192.168.2.10 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZiyCRx8WjX1Fmq63abOBVRYWC6ObrgYh0HxxtPUuM7";
+    };
+    host = {
+      hostNames = [
+        "host"
+        "192.168.2.20"
+      ];
+      publicKey = "192.168.2.20 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBanTj2B8RyDqcbh5q4V7jVf2cOZkfBg0YWiO5MJhGCV";
     };
   };
 
