@@ -46,7 +46,9 @@ let
   asahiPkgs = [
     pkgs.vesktop
     pkgs.prismlauncher
-    pkgs.libreoffice-qt
+    stable.libreoffice-qt
+    pkgs.gns3-server
+    pkgs.gns3-gui
   ];
 
   macbookPkgs = [
