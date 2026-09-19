@@ -22,7 +22,7 @@
 
     not-quite-tiny-dfr.url = "git+ssh://git@github.com/clamlum/not-quite-tiny-dfr.git";
 
-    kopuz.url = "github:clamlum/kopuz";
+    kopuz.url = "github:kopuz-org/kopuz";
     helium.url = "github:clamlum/helium-flake";
 
     lanzaboote = {
