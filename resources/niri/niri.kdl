@@ -17,6 +17,7 @@ input {
     touchpad {
         tap
         scroll-factor 0.25
+        click-method "clickfinger"
     }
 
     mouse {}
@@ -25,39 +26,10 @@ input {
 
     warp-mouse-to-focus
 
-    // focus-follows-mouse max-scroll-amount="100%"
+    focus-follows-mouse max-scroll-amount="100%"
 }
 
-output "DP-3" {
-    mode "2560x1440@165"
-
-    scale 1
-
-    transform "normal"
-
-    position x=1920 y=0
-}
-
-output "DP-1" {
-    mode "2560x1440@500"
-
-    scale 1.30
-
-    transform "normal"
-
-    position x=0 y=0
-}
-
-output "eDP-1" {
-    mode "2560x1600@60.000"
-
-    scale 1.8
-
-    transform "normal"
-
-    position x=0 y=0
-}
-
+include "device.kdl"
 
 layout {
     gaps 0
@@ -244,9 +216,13 @@ binds {
     Mod+Ctrl+Space { spawn-sh "playerctl play-pause"; }
 
     Mod+Ctrl+Up { spawn-sh "sh $HOME/nix-config/scripts/volume.sh +"; }
+    XF86AudioRaiseVolume { spawn-sh "sh $HOME/nix-config/scripts/volume.sh +"; }
+
     Mod+Ctrl+Down { spawn-sh "sh $HOME/nix-config/scripts/volume.sh -"; }
+    XF86AudioLowerVolume { spawn-sh "sh $HOME/nix-config/scripts/volume.sh -"; }
 
     KP_Subtract { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioMute { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     Mod+Shift+Grave { spawn-sh "qs ipc call bar toggle 2>/dev/null || setsid -f qs"; }
 
@@ -259,9 +235,6 @@ binds {
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
 
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
     XF86KbdBrightnessUp { spawn "brightnessctl" "--device=kbd_backlight" "set" "10%+"; }

@@ -1,9 +1,61 @@
-{ pkgs, lib, username, ... }:
+{
+  pkgs,
+  lib,
+  username,
+  inputs,
+  device,
+  ...
+}:
+let
+  smithay-spicy-src = pkgs.fetchFromGitHub {
+    owner = "losnoco";
+    repo = "smithay";
+    rev = "spicy-master";
+    hash = "sha256-8DJkMXCfXxn3MBanScx7W38lFJFzYd53cnUnyO1NJxk=";
+  };
+
+  niri-spicy = pkgs.niri.overrideAttrs (old: rec {
+    pname = "niri-spicy";
+    version = "spicy-main-unstable";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "losnoco";
+      repo = "niri";
+      rev = "spicy-main";
+      hash = "sha256-fV9z8VZ7qvCiJ3ZjYwGb0tjEb9dB3AEma/rKEfKm0MU=";
+    };
+
+    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+      inherit src;
+      hash = "sha256-hD6+CNjITci+T1TIDy/YWtMWbR6icXexbXynSdDiL6c=";
+    };
+
+    postPatch = (old.postPatch or "") + ''
+      cp -r --no-preserve=mode,ownership ${smithay-spicy-src} "$NIX_BUILD_TOP/smithay"
+      chmod -R u+w "$NIX_BUILD_TOP/smithay"
+    '';
+
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+      pkgs.cmake
+      pkgs.rustPlatform.bindgenHook
+    ];
+
+    buildInputs = (old.buildInputs or []) ++ [
+      pkgs.shaderc
+      pkgs.cairo
+      pkgs.glib
+      pkgs.pango
+      pkgs.libdisplay-info
+    ];
+
+    doInstallCheck = false;
+  });
+in
 
 {
   programs.niri = {
     enable = true;
-    package = pkgs.niri;
+    package = if device == "nixos" then niri-spicy else pkgs.niri;
   };
 
   services.displayManager.defaultSession = lib.mkForce "niri";
@@ -11,56 +63,15 @@
   environment.systemPackages = [
     pkgs.swaybg
     pkgs.wtype
-
-    (let
-      version = "0.8.1";
-    in pkgs.rustPlatform.buildRustPackage (finalAttrs: {
-      pname = "xwayland-satellite";
-      inherit version;
-      src = pkgs.fetchFromGitHub {
-        owner = "Supreeeme";
-        repo = "xwayland-satellite";
-        tag = "v${finalAttrs.version}";
-        hash = "sha256-BUE41HjLIGPjq3U8VXPjf8asH8GaMI7FYdgrIHKFMXA=";
-      };
-      postPatch = ''
-        substituteInPlace resources/xwayland-satellite.service \
-          --replace-fail '/usr/local/bin' "$out/bin"
-      '';
-      cargoHash = "sha256-16L6gsvze+m7XCJlOA1lsPNELE3D364ef2FTdkh0rVY=";
-      nativeBuildInputs = [
-        pkgs.installShellFiles
-        pkgs.makeBinaryWrapper
-        pkgs.pkg-config
-        pkgs.rustPlatform.bindgenHook
-      ];
-      buildInputs = [
-        pkgs.libxcb
-        pkgs.libxcb-cursor
-      ];
-      buildNoDefaultFeatures = true;
-      buildFeatures = lib.optional true "systemd";
-      outputs = [ "out" "man" ];
-      doCheck = false;
-      postInstall = ''
-        installManPage --name xwayland-satellite.1 xwayland-satellite.man
-      '' + ''
-        install -Dm0644 resources/xwayland-satellite.service -t $out/lib/systemd/user
-      '';
-      postFixup = ''
-        wrapProgram $out/bin/xwayland-satellite \
-          --prefix PATH : "${lib.makeBinPath [ pkgs.xwayland ]}"
-      '';
-      meta = {
-        description = "Xwayland outside your Wayland compositor";
-        homepage = "https://github.com/Supreeeme/xwayland-satellite";
-        license = lib.licenses.mpl20;
-        mainProgram = "xwayland-satellite";
-        platforms = lib.platforms.linux;
-      };
-    }))
+    inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  home-manager.users.${username}.home.file.".config/niri/config.kdl".source =
-    ../../../resources/niri/niri.kdl;
+  home-manager.users.${username}.home.file = {
+    ".config/niri/config.kdl".source = ../../../resources/niri/niri.kdl;
+    ".config/niri/device.kdl".source = lib.mkMerge [
+      (lib.mkIf (device == "nixos") ../../../resources/niri/nixos.kdl)
+      (lib.mkIf (device == "asahi") ../../../resources/niri/asahi.kdl)
+      (lib.mkIf (device == "surface") ../../../resources/niri/surface.kdl)
+    ];
+  };
 }
