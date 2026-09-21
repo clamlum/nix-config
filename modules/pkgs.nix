@@ -41,9 +41,10 @@ let
     pkgs.jdk25
     pkgs.idea
     pkgs.localsend
+    pkgs.ddcutil
   ];
 
-  asahiPkgs = [
+  laptopPkgs = [
     pkgs.vesktop
     pkgs.prismlauncher
     stable.libreoffice-qt
@@ -69,8 +70,8 @@ in
     ++ (
       if device == "nixos" then
         nixosPkgs ++ linuxPkgs
-      else if device == "asahi" then
-        asahiPkgs ++ linuxPkgs
+      else if device == "asahi" || device == "surface" then
+        laptopPkgs ++ linuxPkgs
       else if device == "macbook" then
         macbookPkgs
       else
