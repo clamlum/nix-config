@@ -78,4 +78,6 @@
       "dir_mode=0755"
     ];
   };
+
+  hardware.i2c.enable = true;
 }
