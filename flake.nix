@@ -22,6 +22,18 @@
 
     not-quite-tiny-dfr.url = "git+ssh://git@github.com/clamlum/not-quite-tiny-dfr.git";
 
+    x1e-nixos.url = "git+https://git.scug.io/nikkuss/x1e-nixos.git";
+
+    custom-pkgs = {
+      url = "git+https://git.scug.io/nikkuss/pkgs.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    surface-firmware = {
+      url = "path:/etc/nixos-firmware";
+      flake = false;
+    };
+
     kopuz.url = "github:kopuz-org/kopuz";
     helium.url = "github:clamlum/helium-flake";
 
@@ -36,6 +48,11 @@
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+
+    xwayland-satellite = {
+      url = "github:supreeeme/xwayland-satellite";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -116,6 +133,39 @@
               }
             ];
           };
+
+        surface =
+        let
+          device = "surface";
+        in
+        mkSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            device = device;
+            inherit username;
+            inherit (inputs) nixpkgs-stable self;
+            inherit inputs;
+          };
+          modules = [
+            ./modules
+            ./modules/devices/surface
+            ./modules/apps
+            ./modules/shell
+            ./modules/desktops/niri
+            ./modules/services
+            ./modules/desktops/dm
+            inputs.x1e-nixos.nixosModules.default
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
+                extraSpecialArgs = {
+                  inherit device username self;
+                };
+              };
+            }
+          ];
+        };
 
         wsl =
           let
@@ -199,6 +249,8 @@
             }
           ];
         };
+
+      diskoConfigurations.disko = import ./disko.nix;
     };
 
   nixConfig = {

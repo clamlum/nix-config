@@ -1,0 +1,13 @@
+output "eDP-1" {
+    mode "2304x1536@120.000"
+
+    scale 1.6
+
+    transform "normal"
+
+    position x=0 y=0
+}
+
+debug {
+    disable-cursor-plane
+}
