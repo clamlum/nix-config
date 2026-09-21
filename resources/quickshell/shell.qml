@@ -9,6 +9,7 @@ ShellRoot {
         delegate: Bar {
             required property var modelData
             screen: modelData
+            autohide: modelData.name === "DP-1"
         }
     }
     Lock {}
