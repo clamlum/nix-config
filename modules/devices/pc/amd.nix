@@ -17,4 +17,10 @@
     pkgs.nvtopPackages.amd
     pkgs.btop-rocm
   ];
+
+  services.lact.enable = true;
+
+  hardware.amdgpu.overdrive.enable = true;
+
+  hardware.amdgpu.overdrive.ppfeaturemask = "0xffffffff";
 }
