@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789333811,
-        "narHash": "sha256-KsDph8jHv532k1kotia49UBRPj9DcjzziGI18tG3X+A=",
+        "lastModified": 1789791621,
+        "narHash": "sha256-QIPbA+dtbY6OFeREyisXu/QsrNhT1jNr4DT7rHWKImE=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "75c719364914ae19f604f3ddbd8f499735d1c9ff",
+        "rev": "57a14ae9be0eaf7bf66e95490ed2d7c6f4bd4c9e",
         "type": "github"
       },
       "original": {
@@ -24,8 +24,8 @@
     "asahi-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787282518,
-        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
+        "lastModified": 1787546558,
+        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
@@ -77,6 +77,27 @@
         "owner": "ipetkov",
         "repo": "crane",
         "type": "github"
+      }
+    },
+    "custom-pkgs": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786972206,
+        "narHash": "sha256-vCZgmEwdcBY7PHSMVd1jpnD812dKTSGBwhVEcyoMSlU=",
+        "ref": "refs/heads/main",
+        "rev": "16337d91437112608a4ac8c079f1539d58a86d51",
+        "revCount": 81,
+        "type": "git",
+        "url": "https://git.scug.io/nikkuss/pkgs.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.scug.io/nikkuss/pkgs.git"
       }
     },
     "flake-compat": {
@@ -144,9 +165,27 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "helium": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
@@ -170,11 +209,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789695075,
-        "narHash": "sha256-HREFWgmCTp28ZdMkSFOW2QW8uI17v5CNc04W46h6aPo=",
+        "lastModified": 1789765459,
+        "narHash": "sha256-voJJ5IZR4w2149u2Jm/j2zifeWROlpZQ+JzmCQwjgn8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4ac5a2ae9025eab1ebece4f9df8c315fd84a738a",
+        "rev": "17903129f47656fa4d07e78ad87f6592ff4f2527",
         "type": "github"
       },
       "original": {
@@ -191,11 +230,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1789646574,
-        "narHash": "sha256-bFhcK6+66gsmcNvpZHOnnABCQ6X/Ln1c/KZiM4pf5Sk=",
+        "lastModified": 1789755509,
+        "narHash": "sha256-AiPCI8tB0XbBtsBrK18/5PSt6MEE8QuCaPgQFmun4DE=",
         "owner": "kopuz-org",
         "repo": "kopuz",
-        "rev": "c8133f0c9714f74cbaafc9ce24143e9704607e5b",
+        "rev": "9da3f20228798b1ca9e84467fda1e8516c8da088",
         "type": "github"
       },
       "original": {
@@ -286,11 +325,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1789542786,
-        "narHash": "sha256-ajQuqcxnj6RYnwCjA/9FTCnrdR2+BDzstE8UembXf60=",
+        "lastModified": 1789749394,
+        "narHash": "sha256-cFTsMQz8Hzn8MT49oaeLSHg62tE86NykugCWkeM2ypk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4c7870105e7f1fdf9c48688c8d7efc21abf0688a",
+        "rev": "cf9d2fb3e50fa1cd5114c47505ea9177f7ff5f49",
         "type": "github"
       },
       "original": {
@@ -331,11 +370,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1789546076,
-        "narHash": "sha256-zVxLZiSnmaaPLwnhj7pwmqe3axBg/C6nG5JZsJMh2g4=",
+        "lastModified": 1789684949,
+        "narHash": "sha256-ZKhUe/2IJUq1JhKxKMu8rbkgSGmPP2ZCqlIPn40aGCM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b1b875982b17dabde9b4a37f3e229e74913e6db3",
+        "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
         "type": "github"
       },
       "original": {
@@ -429,6 +468,7 @@
       "inputs": {
         "apple-silicon-support": "apple-silicon-support",
         "asahi-firmware": "asahi-firmware",
+        "custom-pkgs": "custom-pkgs",
         "helium": "helium",
         "home-manager": "home-manager",
         "kopuz": "kopuz",
@@ -438,7 +478,10 @@
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
         "not-quite-tiny-dfr": "not-quite-tiny-dfr",
-        "plasma-manager": "plasma-manager"
+        "plasma-manager": "plasma-manager",
+        "surface-firmware": "surface-firmware",
+        "x1e-nixos": "x1e-nixos",
+        "xwayland-satellite": "xwayland-satellite"
       }
     },
     "rust-overlay": {
@@ -483,6 +526,40 @@
         "type": "github"
       }
     },
+    "rust-overlay_3": {
+      "inputs": {
+        "nixpkgs": [
+          "xwayland-satellite",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769222645,
+        "narHash": "sha256-gu6oZ86zLudBZMq8LL1qdtYt/S69GV5keQVXdvBrVSU=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "22da29e7f3d8cff75009cbbcf992c7cb66920cfd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "surface-firmware": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789825898,
+        "narHash": "sha256-f3lVy0R3bAXe7ux8DqRxKUNv1dwa7Jdw283Q60TUyWI=",
+        "path": "/etc/nixos-firmware",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos-firmware",
+        "type": "path"
+      }
+    },
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -495,6 +572,57 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "x1e-nixos": {
+      "locked": {
+        "lastModified": 1782927159,
+        "narHash": "sha256-FJGCl7pk4h+cSjEL6UakyovkUNBPLGLn9eo+TLEBSfQ=",
+        "ref": "refs/heads/main",
+        "rev": "ca7db709ee29ecdd3c00fec679febdfb2ebfaa32",
+        "revCount": 9,
+        "type": "git",
+        "url": "https://git.scug.io/nikkuss/x1e-nixos.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.scug.io/nikkuss/x1e-nixos.git"
+      }
+    },
+    "xwayland-satellite": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_3"
+      },
+      "locked": {
+        "lastModified": 1788991189,
+        "narHash": "sha256-0TxfMgqW0/BLD4M942c5DCKYrtPvzsPJwvdcco4LQUM=",
+        "owner": "supreeeme",
+        "repo": "xwayland-satellite",
+        "rev": "add2795134593faafce60e404a0a75df68e9ee0c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "supreeeme",
+        "repo": "xwayland-satellite",
         "type": "github"
       }
     }
