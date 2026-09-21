@@ -3,7 +3,70 @@
 {
   programs.plasma = {
     enable = true;
-    overrideConfig = true;
+
+    workspace = {
+      colorScheme = "BreezeDark";
+    };
+
+    panels = [
+      {
+        location = "bottom";
+        height = 40;
+        floating = true;
+        hiding = "autohide";
+        screen = 0;
+
+        widgets = [
+          {
+            kickoff = {
+              icon = "nixos";
+            };
+          }
+          {
+            iconTasks = { };
+          }
+          "org.kde.plasma.marginsseparator"
+          {
+            systemTray = { };
+          }
+          {
+            digitalClock = {
+              calendar.firstDayOfWeek = "sunday";
+              time.format = "12h";
+            };
+          }
+        ];
+      }
+      {
+        location = "bottom";
+        height = 40;
+        floating = true;
+        hiding = "none";
+        screen = 1;
+
+        widgets = [
+          {
+            kickoff = {
+              icon = "nixos";
+            };
+          }
+          {
+            iconTasks = { };
+          }
+          "org.kde.plasma.marginsseparator"
+          {
+            systemTray = { };
+          }
+          {
+            digitalClock = {
+              calendar.firstDayOfWeek = "sunday";
+              time.format = "12h";
+            };
+          }
+        ];
+      }
+    ];
+
     shortcuts = {
       ActivityManager.switch-to-activity-a63bb97e-770b-4321-8b69-f3d2e4ed41b9 = [ ];
       "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = [ ];
@@ -20,10 +83,11 @@
         "Meta+Volume Mute"
       ];
       kmix.mute = "Volume Mute";
+      kmix.push_to_talk = [ ];
       ksmserver."Halt Without Confirmation" = [ ];
       ksmserver."Lock Session" = [
-        "Meta+L"
         "Screensaver"
+        "Meta+L"
       ];
       ksmserver."Log Out" = "Ctrl+Alt+Del";
       ksmserver."Log Out Without Confirmation" = [ ];
@@ -37,17 +101,17 @@
       kwin."Decrease Opacity" = [ ];
       kwin."Edit Tiles" = [ ];
       kwin.Expose = [
-        "Meta+F9"
         "Ctrl+F9"
+        "Meta+F9"
       ];
       kwin.ExposeAll = [
-        "Meta+F10"
         "Launch (C)"
         "Ctrl+F10"
+        "Meta+F10"
       ];
       kwin.ExposeClass = [
-        "Meta+F7"
         "Ctrl+F7"
+        "Meta+F7"
       ];
       kwin.ExposeClassCurrentDesktop = [ ];
       kwin."Grid View" = "Meta+G";
@@ -134,8 +198,8 @@
       kwin."Window Grow Vertical" = [ ];
       kwin."Window Lower" = [ ];
       kwin."Window Maximize" = [
-        "Meta+Up"
         "Meta+F"
+        "Meta+Up"
       ];
       kwin."Window Maximize Horizontal" = [ ];
       kwin."Window Maximize Vertical" = [ ];
@@ -167,6 +231,7 @@
       kwin."Window Quick Tile Top Right" = [ ];
       kwin."Window Raise" = [ ];
       kwin."Window Resize" = [ ];
+      kwin."Window Restore" = "Meta+Backspace";
       kwin."Window Shrink Horizontal" = [ ];
       kwin."Window Shrink Vertical" = [ ];
       kwin."Window to Desktop 1" = "Meta+!";
@@ -253,6 +318,7 @@
       plasmashell."activate task manager entry 7" = [ ];
       plasmashell."activate task manager entry 8" = [ ];
       plasmashell."activate task manager entry 9" = [ ];
+      plasmashell."clear history" = [ ];
       plasmashell.clear-history = [ ];
       plasmashell.clipboard_action = "Meta+Ctrl+X";
       plasmashell.cycle-panels = [ ];
@@ -271,6 +337,7 @@
       plasmashell."toggle do not disturb" = [ ];
       "services/com.mitchellh.ghostty.desktop"._launch = [ ];
       "services/helium-browser.desktop"._launch = "Meta+D";
+      "services/net.local.fuzzel-edit.sh.desktop"._launch = "Meta+Shift+Space";
       "services/net.local.fuzzel.desktop"._launch = "Meta+Space";
       "services/net.local.wpctl.desktop"._launch = "Num+-";
       "services/org.kde.konsole.desktop"._launch = [ ];
@@ -297,9 +364,10 @@
       dolphinrc."KFileDialog Settings"."Places Icons Static Size" = 22;
       kactivitymanagerdrc.activities.a63bb97e-770b-4321-8b69-f3d2e4ed41b9 = "Default";
       kded5rc.Module-device_automounter.autoload = false;
-      kdeglobals.General.AccentColor = "146,110,228";
-      kdeglobals.General.LastUsedCustomAccentColor = "146,110,228";
+      kdeglobals.General.AccentColor = "67,109,196";
+      kdeglobals.General.LastUsedCustomAccentColor = "61,174,233";
       kdeglobals.General.UseSystemBell = true;
+      kdeglobals.General.accentColorFromWallpaper = true;
       kdeglobals.KDE.AnimationDurationFactor = 0;
       kdeglobals.KDE.contrast = 4;
       kdeglobals.KDE.frameContrast = 0.2;
@@ -326,8 +394,10 @@
       kdeglobals.WM.inactiveForeground = "161,169,177";
       ksmserverrc.General.confirmLogout = false;
       ksmserverrc.General.loginMode = "emptySession";
-      ksplashrc.KSplash.Engine = "none";
-      ksplashrc.KSplash.Theme = "None";
+      kuriikwsfilterrc.General.EnableWebShortcuts = true;
+      kuriikwsfilterrc.General.KeywordDelimiter = ":";
+      kuriikwsfilterrc.General.PreferredWebShortcuts = "";
+      kuriikwsfilterrc.General.UsePreferredWebShortcutsOnly = false;
       kwalletrc.Wallet."Close When Idle" = false;
       kwalletrc.Wallet."Close on Screensaver" = false;
       kwalletrc.Wallet.Enabled = true;
@@ -356,97 +426,178 @@
       kwinrc.Plugins.shakecursorEnabled = false;
       kwinrc.Plugins.slideEnabled = false;
       kwinrc.TabBox.HighlightWindows = false;
+      kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/1184a5ce-be59-4b01-aa11-f9ee495f6ce4/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/22b03028-1498-4ede-827e-fc1f66ed76da/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/2ec6cdaf-172c-4450-9888-46bbff15223d/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/3066265d-2556-4cfa-8455-514e18f0dda8/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/457ab456-b2a4-42de-ad94-034ddb59541c/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/46fbceaa-440e-46a8-bc4a-6a41a1dcad9b/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/68d1c49c-ce73-47bc-942a-bd1063480683/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/6a3b7523-9938-47e6-8b8e-4bd0ee66d8dd/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/92eb9b7a-10f3-46c4-ad23-971c3d5dceb6/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
+      kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/4968d33b-3c76-478b-8e25-cc7db4a1afe3".padding =
+        4;
+      kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/4968d33b-3c76-478b-8e25-cc7db4a1afe3".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".padding =
+        4;
+      kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/9bcb8e18-d5fa-4336-8a75-fcc656a3ff88".tiles =
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/c6e6d9a5-ba21-42bc-a045-22289e602285".padding =
         4;
       kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/c6e6d9a5-ba21-42bc-a045-22289e602285".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/f619e1f1-63b6-4c40-a500-a3a33d0831e5".padding =
         4;
       kwinrc."Tiling/c3d0c802-b693-49e0-98dc-9ab37d0205fd/f619e1f1-63b6-4c40-a500-a3a33d0831e5".tiles =
-        "{\"layoutDirection\":\"horizontal\",\"tiles\":\x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}\x5d}";
+        "{\"layoutDirection\":\"horizontal\",\"tiles\":x5b{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}x5d}";
       kwinrc.Windows.AutoRaiseInterval = 0;
       kwinrc.Windows.DelayFocusInterval = 0;
-      kwinrc.Windows.FocusPolicy = "FocusFollowsMouse";
       kwinrc.Windows.NextFocusPrefersMouse = true;
       kwinrc.Windows.Placement = "Smart";
-      kwinrc.Xwayland.Scale = 1;
-      kwinrc."org.kde.kdecoration2".theme = "Breeze";
+      kwinrc.Windows_HDR.MaxLuminance = 530;
+      kwinrc.Windows_HDR.Reference = 480;
+      kwinrc.Xwayland.Scale = 1.1833333333333333;
+      kwinrulesrc.General.rules = "";
       kxkbrc.Layout.Options = "caps:none";
       kxkbrc.Layout.ResetOldOptions = true;
       plasma-localerc.Formats.LANG = "en_US.UTF-8";
-      plasmarc.Theme.name = "breeze-dark";
+      plasmanotifyrc."Applications/discord".Seen = true;
       plasmarc.Wallpapers.usersWallpapers = osConfig.vars.wallpaperPath;
       spectaclerc.General.clipboardGroup = "PostScreenshotCopyImage";
       spectaclerc.ImageSave.imageSaveLocation = "file:///dev/null";
