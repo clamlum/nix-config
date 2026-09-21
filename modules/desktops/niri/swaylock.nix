@@ -29,8 +29,15 @@
                 command = "${pkgs.systemd}/bin/systemctl suspend";
               }
             ]
-          else
-            [ ]
+          else if device == "nixos" then
+            [
+              {
+                timeout = 120;
+                command = "niri msg action power-off-monitors";
+              }
+            ]
+            else
+              [ ]
         );
     };
   };
