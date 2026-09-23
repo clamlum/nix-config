@@ -42,13 +42,13 @@ let
     pkgs.idea
     pkgs.localsend
     pkgs.ddcutil
+    pkgs.gns3-server
   ];
 
   laptopPkgs = [
     pkgs.vesktop
     pkgs.prismlauncher
     stable.libreoffice-qt
-    pkgs.gns3-server
     pkgs.gns3-gui
   ];
 
