@@ -36,7 +36,7 @@ PanelWindow {
     implicitHeight: Theme.barHeight
     color: "transparent"
 
-    exclusiveZone: autohide ? (revealed ? Theme.barHeight : 2) : Theme.barHeight
+    exclusiveZone: autohide ? (revealed ? Theme.barHeight : 0) : Theme.barHeight
     mask: (autohide && !revealed) ? hoverMaskRegion : null
 
     Region {
@@ -48,7 +48,7 @@ PanelWindow {
         id: hoverZone
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 4
+        height: 1
         y: root.bottom ? parent.height - height : 0
         visible: root.autohide
 
