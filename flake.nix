@@ -34,8 +34,15 @@
       flake = false;
     };
 
-    kopuz.url = "github:kopuz-org/kopuz";
-    helium.url = "github:clamlum/helium-flake";
+    kopuz = {
+      url = "github:clamlum/kopuz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helium = {
+      url = "github:clamlum/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
