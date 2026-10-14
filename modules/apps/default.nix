@@ -13,7 +13,7 @@
         ./gaming.nix
         ./obs.nix
         ./resolve.nix
-        ./openrgb.nix
+        # ./openrgb.nix
         ./discord.nix
       ]
     else
