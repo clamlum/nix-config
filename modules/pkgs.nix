@@ -46,7 +46,6 @@ let
     pkgs.idea
     pkgs.localsend
     pkgs.ddcutil
-    pkgs.gns3-server
   ];
 
   laptopPkgs = [
