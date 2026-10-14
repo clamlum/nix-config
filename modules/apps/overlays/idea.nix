@@ -24,7 +24,7 @@ in
     paths = [ idea-pkg ];
     nativeBuildInputs = [ super.makeWrapper ];
     postBuild = ''
-      wrapProgram $out/bin/idea \
+      wrapProgram $out/bin/intellij-idea \
         --prefix LD_LIBRARY_PATH : ${super.lib.makeLibraryPath libs}
     '';
   };
