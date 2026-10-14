@@ -22,6 +22,8 @@ let
     pkgs.mpv
     pkgs.ffmpeg
 
+    pkgs.bitwarden-desktop
+
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
