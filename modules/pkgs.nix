@@ -36,6 +36,8 @@ let
     pkgs.wl-clipboard
     pkgs.p7zip
     pkgs.nautilus
+
+    stable.libreoffice-qt
   ];
 
   nixosPkgs = [
@@ -50,7 +52,6 @@ let
   laptopPkgs = [
     pkgs.vesktop
     pkgs.prismlauncher
-    stable.libreoffice-qt
     pkgs.gns3-gui
   ];
 
