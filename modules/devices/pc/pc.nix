@@ -15,6 +15,16 @@
     fsType = "ext4";
   };
 
+  fileSystems."/mnt/Videos" = {
+    device = "/dev/disk/by-uuid/897c80cf-612b-44ae-826a-575632dce4e0";
+    fsType = "btrfs";
+    options = [
+      "noatime"
+      "compress=no"
+      "nofail"
+    ];
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   boot.initrd.availableKernelModules = lib.mkForce [
@@ -80,4 +90,22 @@
   };
 
   hardware.i2c.enable = true;
+
+  programs.gpu-screen-recorder = {
+    enable = true;
+    ui.enable = true;
+  };
+
+  services.monado = {
+    enable = true;
+    defaultRuntime = true;
+  };
+
+  systemd.user.services.monado.environment = {
+    STEAMVR_LH_ENABLE = "0";
+    XRT_COMPOSITOR_COMPUTE = "1";
+    WMR_HANDTRACKING = "0";
+  };
+
+  services.udev.packages = [ pkgs.monado ];
 }
