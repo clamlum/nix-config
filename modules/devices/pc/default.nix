@@ -4,6 +4,6 @@
     ./hardware-configuration.nix
     ./pc.nix
     ./virtualisation.nix
-    # ./lanzaboote.nix
+    ./lanzaboote.nix
   ];
 }
