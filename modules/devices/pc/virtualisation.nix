@@ -23,6 +23,7 @@
     dnsmasq
     bridge-utils
     nftables
+    docker-compose
   ];
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
@@ -35,11 +36,12 @@
     "iptable_nat"
   ];
 
-  # virtualisation.docker = {
-  #   enable = true;
-  #   rootless = {
-  #     enable = true;
-  #     setSocketVariable = true;
-  #   };
-  # };
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
+  programs.zsh.shellAliases = {
+    docker = "podman";
+  };
 }
