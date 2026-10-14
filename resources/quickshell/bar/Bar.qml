@@ -224,13 +224,13 @@ PanelWindow {
 
     Timer {
         id: showTimer
-        interval: 500
+        interval: 350
         onTriggered: if (root.autohide && root.pointerActive) root.revealed = true
     }
 
     Timer {
         id: hideTimer
-        interval: 500
+        interval: 350
         onTriggered: if (root.autohide && !root.pointerActive) root.revealed = false
     }
 }
