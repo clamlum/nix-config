@@ -7,40 +7,27 @@
   ...
 }:
 let
-  smithay-spicy-src = pkgs.fetchFromGitHub {
-    owner = "losnoco";
-    repo = "smithay";
-    rev = "spicy-master";
-    hash = "sha256-8DJkMXCfXxn3MBanScx7W38lFJFzYd53cnUnyO1NJxk=";
-  };
-
-  niri-spicy = pkgs.niri.overrideAttrs (old: rec {
+  niri-spicy = pkgs.niri.overrideAttrs (old: {
     pname = "niri-spicy";
-    version = "spicy-main-unstable";
+    version = "spicy-main-${inputs.niri-spicy-src.shortRev or "dirty"}";
 
-    src = pkgs.fetchFromGitHub {
-      owner = "losnoco";
-      repo = "niri";
-      rev = "spicy-main";
-      hash = "sha256-fV9z8VZ7qvCiJ3ZjYwGb0tjEb9dB3AEma/rKEfKm0MU=";
-    };
+    src = inputs.niri-spicy-src;
 
-    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-      inherit src;
-      hash = "sha256-hD6+CNjITci+T1TIDy/YWtMWbR6icXexbXynSdDiL6c=";
+    cargoDeps = pkgs.rustPlatform.importCargoLock {
+      lockFile = "${inputs.niri-spicy-src}/Cargo.lock";
+      allowBuiltinFetchGit = true;
     };
 
     postPatch = (old.postPatch or "") + ''
-      cp -r --no-preserve=mode,ownership ${smithay-spicy-src} "$NIX_BUILD_TOP/smithay"
-      chmod -R u+w "$NIX_BUILD_TOP/smithay"
+      cp -r --no-preserve=mode,ownership ${inputs.smithay-spicy-src} "$NIX_BUILD_TOP/smithay"
     '';
 
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
       pkgs.cmake
       pkgs.rustPlatform.bindgenHook
     ];
 
-    buildInputs = (old.buildInputs or []) ++ [
+    buildInputs = (old.buildInputs or [ ]) ++ [
       pkgs.shaderc
       pkgs.cairo
       pkgs.glib

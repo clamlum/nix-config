@@ -57,6 +57,15 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    niri-spicy-src = {
+      url = "github:losnoco/niri/spicy-main";
+      flake = false;
+    };
+    smithay-spicy-src = {
+      url = "github:losnoco/smithay/spicy-master";
+      flake = false;
+    };
+
     xwayland-satellite = {
       url = "github:supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
