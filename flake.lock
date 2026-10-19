@@ -24,8 +24,8 @@
     "asahi-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787546558,
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "lastModified": 1787282518,
+        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
@@ -234,11 +234,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1791960684,
-        "narHash": "sha256-FmSrmhTVEqkqxSiYEIHZlbtdcDmfQxE3eX71cQLrqpM=",
+        "lastModified": 1791960820,
+        "narHash": "sha256-6by/N091XimuToxmIxOdzQMG7tPe/4zXhDyyXopZ1/A=",
         "owner": "clamlum",
         "repo": "kopuz",
-        "rev": "5c2b00b8035e6b30041ff1ba8b6418bdecdeda58",
+        "rev": "f42f721ccc3cbc712b87018df959886abdfb17d9",
         "type": "github"
       },
       "original": {
@@ -561,8 +561,8 @@
     "surface-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787546558,
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "lastModified": 1787282518,
+        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
