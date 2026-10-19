@@ -75,4 +75,6 @@
       "dir_mode=0755"
     ];
   };
+
+  hardware.graphics.enable = true;
 }
