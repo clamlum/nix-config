@@ -128,8 +128,10 @@ esac
 
 echo "Using output: $OUTPUT"
 
+sudo true
+
 rebuild_start=$(date +%s)
-if sudo $COMMAND $ACTION --flake "$FLAKE#$OUTPUT"; then
+if $COMMAND $ACTION --flake "$FLAKE#$OUTPUT" --sudo; then
     rebuild_elapsed=$(( $(date +%s) - rebuild_start ))
     echo "==> Rebuild/$ACTION complete in $(( rebuild_elapsed / 60 ))m $(( rebuild_elapsed % 60 ))s"
 else
