@@ -46,6 +46,8 @@ let
     pkgs.idea
     pkgs.localsend
     pkgs.ddcutil
+
+    (pkgs.callPackage ./apps/epic.nix { })
   ];
 
   laptopPkgs = [
