@@ -61,7 +61,10 @@
     package = pkgs.sunshine;
   };
 
-  powerManagement.cpuFreqGovernor = "performance";
+  services.udev.extraHwdb = ''
+    evdev:name:libvirtualhid Mouse:*
+     MOUSE_DPI=10000@1000
+  '';
 
   powerManagement.cpuFreqGovernor = "performance";
 
