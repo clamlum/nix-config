@@ -5,5 +5,6 @@
     ./pc.nix
     ./virtualisation.nix
     ./lanzaboote.nix
+    ./llama.nix
   ];
 }

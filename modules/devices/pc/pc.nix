@@ -63,14 +63,7 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-rocm;
-    rocmOverrideGfx = "12.0.1";
-    host = "0.0.0.0";
-    port = 11434;
-    openFirewall = true;
-  };
+  powerManagement.cpuFreqGovernor = "performance";
 
   environment.systemPackages = [ pkgs.cifs-utils ];
   fileSystems."/mnt/music" = {
