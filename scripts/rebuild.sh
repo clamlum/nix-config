@@ -128,8 +128,6 @@ esac
 
 echo "Using output: $OUTPUT"
 
-sudo true
-
 rebuild_start=$(date +%s)
 if $COMMAND $ACTION --flake "$FLAKE#$OUTPUT" --sudo; then
     rebuild_elapsed=$(( $(date +%s) - rebuild_start ))
