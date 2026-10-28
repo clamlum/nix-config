@@ -41,9 +41,9 @@
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  programs.zsh.shellAliases = {
-    docker = "podman";
-  };
+  # programs.zsh.shellAliases = {
+  #   docker = "podman";
+  # };
 
   virtualisation.waydroid.enable = true;
   virtualisation.waydroid.package = pkgs.waydroid-nftables;
