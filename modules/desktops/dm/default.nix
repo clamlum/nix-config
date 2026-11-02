@@ -1,5 +1,6 @@
-{ device, ... }:
+{ ... }:
 
 {
-  imports = [ ./ly.nix ];
+  # imports = [ ./ly.nix ];
+  services.displayManager.ly.enable = true;
 }
