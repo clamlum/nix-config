@@ -59,6 +59,12 @@
     capSysAdmin = true;
     openFirewall = true;
     package = pkgs.sunshine;
+
+    settings = {
+      capture = "kms";
+      output_name = "DP-1";
+      csrf_allowed_origins = "https://192.168.2.1:47990";
+    };
   };
 
   services.udev.extraHwdb = ''
