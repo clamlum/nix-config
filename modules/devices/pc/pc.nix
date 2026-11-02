@@ -110,4 +110,6 @@
   };
 
   services.udev.packages = [ pkgs.monado ];
+
+  services.tailscale.enable = true;
 }
