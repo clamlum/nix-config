@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793476745,
-        "narHash": "sha256-qo68Efei35KLsd7dp1nHY/O+bEPLqvaHXgHNSm3/wgI=",
+        "lastModified": 1793517866,
+        "narHash": "sha256-LKNAawXT7zHrnOkzzYKM+Kakkhkiz6f9nn+2+Aukfi8=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "ed8b3263d1d78ecb1fa5a0640eb3f139bbe86eab",
+        "rev": "f88fb8087b3f9a0b5f70275fe8e6aca48a95235e",
         "type": "github"
       },
       "original": {
@@ -24,8 +24,8 @@
     "asahi-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787546558,
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "lastModified": 1787282518,
+        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
@@ -561,8 +561,8 @@
     "surface-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787546558,
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "lastModified": 1787282518,
+        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
