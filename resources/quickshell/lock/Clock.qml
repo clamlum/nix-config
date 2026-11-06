@@ -7,7 +7,7 @@ Item {
     property string time: Qt.formatDateTime(new Date(), "hh:mm")
     property string date: Qt.formatDateTime(new Date(), "ddd MMM dd")
 
-    implicitWidth: Math.max(time.implicitWidth, date.implicitWidth)
+    implicitWidth: Math.max(timeText.implicitWidth, dateText.implicitWidth)
     implicitHeight: column.height
 
     Column {
@@ -16,7 +16,7 @@ Item {
         spacing: 0
 
         Text {
-            id: time
+            id: timeText
             text: root.time
             color: Theme.text
             anchors.horizontalCenter: parent.horizontalCenter
@@ -27,7 +27,7 @@ Item {
             }
         }
         Text {
-            id: date
+            id: dateText
             text: root.date
             color: Theme.text
             anchors.horizontalCenter: parent.horizontalCenter

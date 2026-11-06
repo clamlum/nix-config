@@ -9,7 +9,8 @@ ShellRoot {
         delegate: Bar {
             required property var modelData
             screen: modelData
-            autohide: Config.autohideOutputs.includes(modelData.name)
+            fullAutohide: Config.autohideOutputs.includes(modelData.name)
+            smartAutohide: Config.smartAutohideOutputs.includes(modelData.name)
         }
     }
     Lock {}

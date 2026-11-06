@@ -134,14 +134,22 @@ Singleton {
                     root.workspaces = evt.WorkspacesChanged.workspaces
                 } else if (evt.WorkspaceActivated) {
                     const { id, focused } = evt.WorkspaceActivated
+                    const target = root.workspaces.find(w => w.id === id)
+                    const output = target ? target.output : null
+
                     root.workspaces = root.workspaces.map(w => {
+                        const sameOutput = w.output === output
+                        const next = Object.assign({}, w)
+
+                        if (sameOutput)
+                            next.is_active = (w.id === id)
+
                         if (w.id === id)
-                            return Object.assign({}, w, { is_focused: focused })
+                            next.is_focused = focused
+                        else if (focused)
+                            next.is_focused = false
 
-                        if (focused)
-                            return Object.assign({}, w, { is_focused: false })
-
-                        return w
+                        return next
                     })
                 } else if (evt.WorkspaceActiveWindowChanged) {
                     const { workspace_id, active_window_id } = evt.WorkspaceActiveWindowChanged

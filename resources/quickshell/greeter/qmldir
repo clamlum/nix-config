@@ -1,0 +1,4 @@
+module greeter
+
+singleton GreeterContext 1.0 GreeterContext.qml
+GreeterSelector 1.0 GreeterSelector.qml

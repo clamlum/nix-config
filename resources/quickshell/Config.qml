@@ -8,7 +8,8 @@ Singleton {
 
     property string wallpaperPath: Quickshell.env("WALLPAPER_PATH") ?? ""
 
-    property list<string> autohideOutputs: ["DP-1", "eDP-1"]
+    property list<string> autohideOutputs: ["DP-1"]
+    property list<string> smartAutohideOutputs: ["eDP-1"]
 
     function toggle() {
         root.barPosition = root.barPosition === "top" ? "bottom" : "top"

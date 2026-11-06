@@ -2,6 +2,7 @@ module lock
 
 Lock 1.0 Lock.qml
 singleton LockContext 1.0 LockContext.qml
+LockContent 1.0 LockContent.qml
 LockSurface 1.0 LockSurface.qml
 
 InputField 1.0 InputField.qml
