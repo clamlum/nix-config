@@ -77,4 +77,8 @@
   };
 
   hardware.graphics.enable = true;
+
+  services.tailscale.enable = true;
+
+  programs.kdeconnect.enable = true;
 }
