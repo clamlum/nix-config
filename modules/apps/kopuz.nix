@@ -22,8 +22,8 @@ in
     inputs.kopuz.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  home-manager.users.${username}.home.file.".config/kopuz/settings.toml" = {
-    text = configFile;
-    force = true;
-  };
+  # home-manager.users.${username}.home.file.".config/kopuz/settings.toml" = {
+  #   text = configFile;
+  #   force = true;
+  # };
 }
