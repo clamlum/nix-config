@@ -15,6 +15,8 @@
     pkgs.bat
     pkgs.zoxide
     pkgs.file
+    pkgs.nh
+    pkgs.tmux
   ];
 
   home.file.".zshrc".text = ''
