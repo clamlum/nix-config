@@ -35,8 +35,7 @@
     };
 
     kopuz = {
-      url = "github:clamlum/kopuz";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:kopuz-org/kopuz";
     };
 
     helium = {
