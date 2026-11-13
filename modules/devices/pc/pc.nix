@@ -74,21 +74,13 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  boot.supportedFilesystems = [ "nfs" ];
+
   environment.systemPackages = [ pkgs.cifs-utils ];
-  fileSystems."/mnt/music" = {
-    device = "//host.media.local/music";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/secrets/smb"
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.mount-timeout=5"
-      "soft"
-      "uid=1000"
-      "gid=100"
-      "file_mode=0755"
-      "dir_mode=0755"
-    ];
+  fileSystems."/mnt/share" = {
+    device = "192.168.2.20:/mnt/drive/media/library";
+    fsType = "nfs4";
+    options = [ "nofail" ];
   };
 
   hardware.i2c.enable = true;
@@ -112,4 +104,6 @@
   services.udev.packages = [ pkgs.monado ];
 
   services.tailscale.enable = true;
+
+  programs.kdeconnect.enable = true;
 }
