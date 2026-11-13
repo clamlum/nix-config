@@ -42,7 +42,7 @@
     alias nrt="sh $REBUILD_SCRIPT -a test"
     alias nrbu="sh $REBUILD_SCRIPT -a build"
     alias nrbo="sh $REBUILD_SCRIPT -a boot"
-    alias ncg="echo Running nix-collect-garbage... && sudo nix-collect-garbage -d 2>/dev/null | tail -n 1 && nix-collect-garbage -d 2>/dev/null | tail -n 1"
+    alias ncg="nh clean all -q"
 
     i () {
       if [[ $# -eq 0 ]]; then
