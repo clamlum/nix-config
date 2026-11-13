@@ -46,6 +46,15 @@
     options = [ "subvol=@swap" ];
   };
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/7598-D891";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
+
   swapDevices = [
     {
       device = "/.swapvol/swapfile";
