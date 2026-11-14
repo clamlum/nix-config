@@ -25,7 +25,7 @@
     x1e-nixos.url = "git+https://git.scug.io/nikkuss/x1e-nixos.git";
 
     custom-pkgs = {
-      url = "git+https://git.scug.io/nikkuss/pkgs.git";
+      url = "git+https://git.scug.io/nikkuss/pkgs.git?rev=16337d91437112608a4ac8c079f1539d58a86d51";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

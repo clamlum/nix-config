@@ -7,7 +7,3 @@ output "eDP-1" {
 
     position x=0 y=0
 }
-
-debug {
-    disable-cursor-plane
-}
