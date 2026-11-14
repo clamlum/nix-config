@@ -2,7 +2,14 @@
 {
   boot.kernelModules = [ "mpls_router" "mpls_iptunnel" "sch_netem" ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   programs.wireshark.enable = true;
 
   services.gns3-server = {

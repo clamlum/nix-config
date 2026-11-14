@@ -6,5 +6,6 @@
     ./virtualisation.nix
     ./lanzaboote.nix
     ./llama.nix
+    ./gns3.nix
   ];
 }

@@ -97,28 +97,19 @@ if [[ "$UPDATE_INPUTS" -eq 0 && ${#INPUTS[@]} -gt 0 ]]; then
 fi
 
 if [[ "$UPGRADE" -eq 1 ]]; then
-    echo "==> Updating $FLAKE"
-    cd "$FLAKE"
-    git pull
-    echo "==> Updating flake in $FLAKE"
-    nix flake update
-    echo "==> Flake update complete"
-elif [[ "$UPDATE_INPUTS" -eq 1 ]]; then
-    echo "==> Updating flake inputs '${INPUTS[*]}' in $FLAKE"
-    cd "$FLAKE"
-    nix flake update "${INPUTS[@]}"
-    echo "==> Flake input update complete"
+    echo "==> Pulling latest changes in $FLAKE"
+    git -C "$FLAKE" pull
 fi
 
 case "$OS" in
     Darwin)
         echo "==> Running on macOS"
         OUTPUT="macbook"
-        COMMAND="darwin-rebuild"
+        COMMAND=(nh darwin)
         ;;
     Linux)
         echo "==> Running on Linux"
-        COMMAND="nixos-rebuild"
+        COMMAND=(nh os)
         ;;
     *)
         echo "Unknown OS: $OS"
@@ -128,8 +119,22 @@ esac
 
 echo "Using output: $OUTPUT"
 
+NH_ARGS=()
+if [[ "$UPGRADE" -eq 1 ]]; then
+    NH_ARGS+=(-u)
+elif [[ "$UPDATE_INPUTS" -eq 1 ]]; then
+    for input in "${INPUTS[@]}"; do
+        NH_ARGS+=(-U "$input")
+    done
+fi
+
 rebuild_start=$(date +%s)
-if $COMMAND $ACTION --flake "$FLAKE#$OUTPUT" --sudo; then
+
+run_rebuild() {
+    "${COMMAND[@]}" "$ACTION" "$FLAKE" -H "$OUTPUT" "${NH_ARGS[@]}"
+}
+
+if run_rebuild; then
     rebuild_elapsed=$(( $(date +%s) - rebuild_start ))
     echo "==> Rebuild/$ACTION complete in $(( rebuild_elapsed / 60 ))m $(( rebuild_elapsed % 60 ))s"
 else
@@ -139,7 +144,6 @@ fi
 
 if [[ "$GC" -eq 1 ]]; then
     echo "==> Running garbage collection"
-    sudo nix-collect-garbage -d 2>/dev/null | tail -n 1
-    nix-collect-garbage -d 2>/dev/null | tail -n 1
+    nh clean all -q
     echo "==> Garbage collection complete"
 fi

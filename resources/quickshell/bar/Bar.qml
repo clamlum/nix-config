@@ -3,14 +3,31 @@ import QtQuick
 import QtQuick.Layouts
 import "modules"
 import "../"
+import "../services" as Services
 
 PanelWindow {
     id: root
 
     property bool bottom: Config.barPosition === "bottom"
 
-    property bool autohide: false
+    property bool fullAutohide: false
+    property bool smartAutohide: false
+
+    readonly property var activeWorkspace:
+        Services.Niri.workspaces.find(w => w.output === root.screen.name && w.is_active) ?? null
+
+    readonly property bool hasWindow: activeWorkspace
+        ? Services.Niri.windows.some(w => w.workspace_id === activeWorkspace.id)
+        : false
+
+    property bool autohide: fullAutohide || (smartAutohide && hasWindow)
     property bool revealed: !autohide
+
+    onAutohideChanged: {
+        showTimer.stop()
+        hideTimer.stop()
+        revealed = !autohide
+    }
 
     property bool pointerActive: edgeHover.hovered || contentHover.hovered
 

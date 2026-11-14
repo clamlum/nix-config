@@ -34,6 +34,8 @@ include "device.kdl"
 layout {
     gaps 0
 
+    background-color "#000000"
+
     center-focused-column "never"
 
     preset-column-widths {
@@ -80,7 +82,10 @@ layout {
 spawn-at-startup "quickshell"
 spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "openrgb" "--startminimized" "-p" "blue"
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/clamt/Pictures/wallpapers/353544.jpg"
+spawn-at-startup "swaybg" "-o" "DP-2" "-i" "/home/clamt/Pictures/wallpapers/353544.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-o" "DP-3" "-i" "/home/clamt/Pictures/wallpapers/353544.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-o" "eDP-1" "-i" "/home/clamt/Pictures/wallpapers/353544.jpg" "-m" "fill"
+
 
 hotkey-overlay {
     skip-at-startup
