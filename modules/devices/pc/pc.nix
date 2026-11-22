@@ -80,7 +80,13 @@
   fileSystems."/mnt/share" = {
     device = "192.168.2.20:/mnt/drive/media/library";
     fsType = "nfs4";
-    options = [ "nofail" ];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+      "x-systemd.mount-timeout=10s"
+      "nofail"
+    ];
   };
 
   hardware.i2c.enable = true;
