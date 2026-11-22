@@ -46,6 +46,7 @@ let
     pkgs.idea
     pkgs.localsend
     pkgs.ddcutil
+    pkgs.openrgb
 
     # (pkgs.callPackage ./apps/epic.nix { })
   ];
