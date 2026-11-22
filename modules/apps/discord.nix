@@ -1,5 +1,5 @@
 
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   vencord = pkgs.vencord.overrideAttrs (final: prev:

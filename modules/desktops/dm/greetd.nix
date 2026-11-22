@@ -1,4 +1,4 @@
-{ pkgs, lib, config, device, username, ... }:
+{ pkgs, lib, config, device, ... }:
 let
   greeterScale = {
     nixos = "1";
