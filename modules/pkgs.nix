@@ -47,8 +47,6 @@ let
     pkgs.localsend
     pkgs.ddcutil
     pkgs.openrgb
-
-    # (pkgs.callPackage ./apps/epic.nix { })
   ];
 
   laptopPkgs = [
