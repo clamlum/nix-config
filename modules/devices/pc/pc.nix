@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  username,
   ...
 }:
 
@@ -112,4 +113,14 @@
   services.tailscale.enable = true;
 
   programs.kdeconnect.enable = true;
+
+  hardware.bluetooth.enable = true;
+
+  services.blueman.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", ATTRS{idVendor}=="3367", ATTRS{idProduct}=="1970", GROUP="input", MODE="0660"
+  '';
+
+  users.users.${username}.extraGroups = [ "input" ];
 }
