@@ -1,16 +1,36 @@
-{ pkgs, ... }:
+
+{ pkgs, lib, ... }:
+
 let
-  vencord-pr = pkgs.callPackage (pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/NixOS/nixpkgs/19375cd0259c026cbe65f239d885b41babc2e801/pkgs/by-name/ve/vencord/package.nix";
-    hash = "sha256-1G89n8KGxfJWE62yI07hGqm+F/6+Z/VE2w4lm6X+YlI=";
-  }) { };
+  vencord = pkgs.vencord.overrideAttrs (final: prev:
+    let
+      src = pkgs.fetchFromGitHub {
+        owner = "Vendicated";
+        repo = "Vencord";
+        rev = "main";
+        hash = "sha256-L+E/SPVbl/+K6bwC11tkWUYdkKZ8b3K+Dtp6TidLBuw=";
+      };
+    in
+    {
+      version = src.rev;
+      inherit src;
+
+      pnpmDeps = pkgs.fetchPnpmDeps {
+        pname = prev.pname;
+        inherit src;
+        pnpm = pkgs.pnpm_12;
+        fetcherVersion = 5;
+        hash = "sha256-/cnY+wj2/oHohUwf7zUHsE4aWI8YdhBNO8jSVuvQH+M=";
+      };
+    }
+  );
 in
 {
   environment.systemPackages = [
     (pkgs.discord.override {
+      inherit vencord;
       withVencord = true;
-      vencord = vencord-pr;
-      # withOpenASAR = true;
+      withOpenASAR = true;
     })
   ];
 }
