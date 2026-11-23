@@ -1,3 +1,5 @@
 singleton Battery 1.0 Battery.qml
+singleton Compositor 1.0 Compositor.qml
+singleton Mango 1.0 Mango.qml
 singleton Mpris 1.0 Mpris.qml
 singleton Niri 1.0 Niri.qml

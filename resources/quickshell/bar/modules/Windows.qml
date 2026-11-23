@@ -10,7 +10,7 @@ Item {
 
     property int maxTitleChars: 40
 
-    property var currentWindow: Services.Niri.focusedWindow
+    property var currentWindow: Services.Compositor.focusedWindow
     property string windowClass: currentWindow?.app_id || ""
     property string windowTitle: currentWindow?.title || ""
 

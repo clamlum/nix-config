@@ -69,6 +69,11 @@
       url = "github:supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mangowm = {
+      url = "github:mangowm/mango/wl-only";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -101,6 +106,7 @@
               ./modules/apps
               ./modules/shell
               ./modules/desktops/niri
+              ./modules/desktops/mango
               ./modules/desktops/kde
               ./modules/services
               ./modules/desktops/dm
