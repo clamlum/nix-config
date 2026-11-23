@@ -12,8 +12,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems."/mnt/Games" = {
-    device = "/dev/disk/by-uuid/8f56f8cf-1cd4-4dab-a2fc-37c29f4e6ed5";
-    fsType = "ext4";
+   device = "/dev/disk/by-uuid/8ed76560-53e7-4b1d-99df-80f4e0f0d27d";
+   fsType = "btrfs";
+   options = [
+     "compress=zstd"
+     "noatime"
+     "nofail"
+   ];
   };
 
   fileSystems."/mnt/Videos" = {
