@@ -1,15 +1,7 @@
-{ pkgs, nixpkgs-stable, ... }:
-
-let
-  stable = import nixpkgs-stable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
-in
+{ pkgs, ... }:
 
 {
   environment.systemPackages = [
-    stable.lutris
     pkgs.protonup-qt
     pkgs.prismlauncher
     pkgs.jdk25
