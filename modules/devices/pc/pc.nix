@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  username,
   ...
 }:
 
@@ -11,8 +12,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems."/mnt/Games" = {
-    device = "/dev/disk/by-uuid/8f56f8cf-1cd4-4dab-a2fc-37c29f4e6ed5";
-    fsType = "ext4";
+   device = "/dev/disk/by-uuid/8ed76560-53e7-4b1d-99df-80f4e0f0d27d";
+   fsType = "btrfs";
+   options = [
+     "compress=zstd"
+     "noatime"
+     "nofail"
+   ];
   };
 
   fileSystems."/mnt/Videos" = {
@@ -80,7 +86,13 @@
   fileSystems."/mnt/share" = {
     device = "192.168.2.20:/mnt/drive/media/library";
     fsType = "nfs4";
-    options = [ "nofail" ];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+      "x-systemd.mount-timeout=10s"
+      "nofail"
+    ];
   };
 
   hardware.i2c.enable = true;
@@ -106,4 +118,14 @@
   services.tailscale.enable = true;
 
   programs.kdeconnect.enable = true;
+
+  hardware.bluetooth.enable = true;
+
+  services.blueman.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", ATTRS{idVendor}=="3367", ATTRS{idProduct}=="1970", GROUP="input", MODE="0660"
+  '';
+
+  users.users.${username}.extraGroups = [ "input" ];
 }

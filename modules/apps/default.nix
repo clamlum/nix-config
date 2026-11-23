@@ -12,9 +12,8 @@
         ./android.nix
         ./gaming.nix
         ./obs.nix
-        ./resolve.nix
-        # ./openrgb.nix
         ./discord.nix
+        ./openmouse.nix
       ]
     else
       [ ]

@@ -14,10 +14,10 @@ PanelWindow {
     property bool smartAutohide: false
 
     readonly property var activeWorkspace:
-        Services.Niri.workspaces.find(w => w.output === root.screen.name && w.is_active) ?? null
+        Services.Compositor.workspaces.find(w => w.output === root.screen.name && w.is_active) ?? null
 
     readonly property bool hasWindow: activeWorkspace
-        ? Services.Niri.windows.some(w => w.workspace_id === activeWorkspace.id)
+        ? Services.Compositor.windows.some(w => w.workspace_id === activeWorkspace.id)
         : false
 
     property bool autohide: fullAutohide || (smartAutohide && hasWindow)

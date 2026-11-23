@@ -12,7 +12,7 @@ Item {
     implicitHeight: 32
 
     property string outputName: ""
-    property var workspaceData: Services.Niri.workspaces
+    property var workspaceData: Services.Compositor.workspaces
 
     Row {
         id: row
@@ -59,7 +59,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: Services.Niri.focusWorkspace(item.modelData.idx)
+                    onClicked: Services.Compositor.focusWorkspace(item.modelData.idx)
                 }
             }
         }

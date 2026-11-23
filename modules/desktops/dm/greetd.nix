@@ -1,4 +1,4 @@
-{ pkgs, lib, config, device, username, ... }:
+{ pkgs, lib, config, device, ... }:
 let
   greeterScale = {
     nixos = "1";
@@ -14,7 +14,7 @@ let
     {
       nativeBuildInputs = [ pkgs.jq ];
       usersJson = builtins.toJSON users;
-      shellCmd = "${pkgs.bashInteractive}/bin/bash";
+      shellCmd = "${pkgs.bashInteractive}/bin/zsh";
     }
     ''
       shopt -s nullglob

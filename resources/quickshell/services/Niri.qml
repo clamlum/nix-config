@@ -6,6 +6,8 @@ import QtQuick
 Singleton {
     id: root
 
+    readonly property bool enabled: !!Quickshell.env("NIRI_SOCKET")
+
     property var workspaces: []
     property var windows: []
     property int focusedWindowId: -1
@@ -71,7 +73,7 @@ Singleton {
     Process {
         id: workspacesProc
         command: ["sh", "-c", "niri msg -j workspaces 2>/dev/null | jq -c ."]
-        running: true
+        running: root.enabled
         stdout: SplitParser {
             onRead: line => root.parseJsonLine(line, data => {
                 if (Array.isArray(data))
@@ -83,7 +85,7 @@ Singleton {
     Process {
         id: windowsProc
         command: ["sh", "-c", "niri msg -j windows 2>/dev/null | jq -c ."]
-        running: true
+        running: root.enabled
         stdout: SplitParser {
             onRead: line => root.parseJsonLine(line, data => {
                 if (Array.isArray(data)) {
@@ -97,7 +99,7 @@ Singleton {
     Process {
         id: focusedWindowProc
         command: ["sh", "-c", "niri msg -j focused-window 2>/dev/null | jq -c ."]
-        running: true
+        running: root.enabled
         stdout: SplitParser {
             onRead: line => root.parseJsonLine(line, data => {
                 const win = data?.id !== undefined ? data : null
@@ -120,7 +122,7 @@ Singleton {
     Process {
         id: eventStream
         command: ["niri", "msg", "-j", "event-stream"]
-        running: true
+        running: root.enabled
         stdout: SplitParser {
             onRead: line => {
                 let evt
@@ -175,7 +177,7 @@ Singleton {
             }
         }
         onRunningChanged: {
-            if (!running)
+            if (!running && root.enabled)
                 restartTimer.start()
         }
     }
@@ -183,7 +185,7 @@ Singleton {
     Timer {
         id: restartTimer
         interval: 1000
-        onTriggered: eventStream.running = true
+        onTriggered: if (root.enabled) eventStream.running = true
     }
 
     Process {
