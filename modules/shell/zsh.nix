@@ -1,19 +1,26 @@
 { config, ... }:
 let
-  inherit (config.flake.meta) username;
+  topConfig = config;
 in
 {
-  flake.modules.homeManager.zsh =
-    { pkgs, ... }:
+  flake.wrappers.zsh =
     {
-      home.packages = [
-        pkgs.zsh
-        pkgs.oh-my-zsh
-        pkgs.zsh-autosuggestions
-        pkgs.zsh-syntax-highlighting
-        pkgs.zsh-you-should-use
-        pkgs.zsh-nix-shell
+      config,
+      pkgs,
+      wlib,
+      ...
+    }:
+    {
+      imports = [ wlib.wrapperModules.zsh ];
 
+      hmSessionVariables = null;
+
+      env = {
+        ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
+        RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+      };
+
+      runtimePkgs = [
         pkgs.lsd
         pkgs.bat
         pkgs.zoxide
@@ -22,9 +29,9 @@ in
         pkgs.tmux
       ];
 
-      home.file.".zshrc".text = ''
-        export ZSH="${pkgs.oh-my-zsh}/share/oh-my-zsh"
-        export RUST_SRC_PATH=${pkgs.rustPlatform.rustLibSrc}
+      zshrc.content = ''
+        export ZSH_CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
+        export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-''${HOST}-''${ZSH_VERSION}"
 
         source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -79,17 +86,47 @@ in
         eval "$(zoxide init zsh)"
 
         if [[ -n "$IN_NIX_SHELL" || "''${PATH%%:*}" == /nix/store/* ]]; then
-          source ~/.oh-my-zsh/custom/themes/nix-shell.zsh-theme
+          source ${config.constructFiles.themeNixShell.path}
         else
-          source ~/.oh-my-zsh/custom/themes/custom.zsh-theme
+          source ${config.constructFiles.themeBlue.path}
           cd ~
         fi
       '';
     };
 
-  flake.modules.generic.zsh = {
-    home-manager.users.${username}.imports = [
-      config.flake.modules.homeManager.zsh
-    ];
-  };
+  flake.modules.generic.zsh =
+    {
+      config,
+      lib,
+      pkgs,
+      _class,
+      ...
+    }:
+    {
+      imports = [
+        topConfig.flake.wrappers.zsh.install
+      ];
+
+      wrappers.zsh = {
+        enable = true;
+      }
+      // lib.optionalAttrs (_class == "nixos") {
+        asSystemDefault = true;
+      };
+
+      environment.systemPackages = [
+        pkgs.lsd
+        pkgs.bat
+        pkgs.zoxide
+        pkgs.file
+        pkgs.nh
+        pkgs.tmux
+      ];
+    }
+    // lib.optionalAttrs (_class == "nixos") {
+      programs.zsh = {
+        package = config.wrappers.zsh.wrapper;
+        enableGlobalCompInit = false;
+      };
+    };
 }

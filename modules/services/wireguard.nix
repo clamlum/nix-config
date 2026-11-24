@@ -11,7 +11,7 @@ in
       };
     };
 
-    home-manager.users.${username}.home.file.".zshrc".text = ''
+    wrappers.zsh.zshrc.content = ''
       function vpn() {
         if [[ $1 == "on" ]]; then
           sudo systemctl start wg-quick-wg0 && echo "VPN on"

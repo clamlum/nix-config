@@ -1,10 +1,6 @@
-{ config, ... }:
-let
-  inherit (config.flake.meta) username;
-in
 {
-  flake.modules.homeManager.nix-shell = {
-    home.file.".zshrc".text = ''
+  flake.modules.generic.nix-shell = {
+    wrappers.zsh.zshrc.content = ''
       f () {
         local -a COMMAND=(nix shell)
         local -a args=()
@@ -34,11 +30,5 @@ in
         fi
       }
     '';
-  };
-
-  flake.modules.generic.nix-shell = {
-    home-manager.users.${username}.imports = [
-      config.flake.modules.homeManager.nix-shell
-    ];
   };
 }

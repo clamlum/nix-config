@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.flake-parts.flakeModules.modules
+    inputs.nix-wrapper-modules.flakeModules.wrappers
   ];
 
   options.flake.meta = lib.mkOption {

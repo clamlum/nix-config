@@ -12,7 +12,7 @@
           {
             nativeBuildInputs = [ pkgs.jq ];
             usersJson = builtins.toJSON users;
-            shellCmd = "${pkgs.zsh}/bin/zsh";
+            shellCmd = "${config.programs.zsh.package}/bin/zsh";
           }
           ''
             shopt -s nullglob

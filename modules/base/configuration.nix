@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.configuration =
-    { pkgs, config, ... }:
+    { config, ... }:
     {
       nix.settings.trusted-users = [
         "root"
@@ -23,8 +23,6 @@
         LC_TIME = "en_NZ.UTF-8";
       };
 
-      programs.zsh.enable = true;
-
       users.users.clamt = {
         isNormalUser = true;
         extraGroups = [
@@ -36,7 +34,6 @@
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/sXIx+I7BCq6T4QfiEWqvh+E1d9+y4CrTijURf5Wsq clamt"
         ];
-        shell = pkgs.zsh;
       };
 
       programs.nix-ld.enable = true;

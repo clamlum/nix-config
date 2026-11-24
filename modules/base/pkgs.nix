@@ -12,7 +12,6 @@ in
     { pkgs, ... }:
     {
       environment.systemPackages = [
-        pkgs.git
         pkgs.python3
         pkgs.rustc
         pkgs.rustPlatform.rustLibSrc
