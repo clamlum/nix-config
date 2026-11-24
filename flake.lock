@@ -24,8 +24,8 @@
     "asahi-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787546558,
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "lastModified": 1787282518,
+        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
@@ -250,11 +250,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1795357443,
-        "narHash": "sha256-VzhccB/6mDfR1gVUwb/I+RzUZY42HnfmRANyxaNSURw=",
+        "lastModified": 1795469315,
+        "narHash": "sha256-6qL8ZwFFJUCnq1J2Ws8lIaq2OVD171WvvVGEd4IO374=",
         "owner": "kopuz-org",
         "repo": "kopuz",
-        "rev": "727ae811ebe4e5c21f3002f08818edd57e67ca22",
+        "rev": "fe612590c0fe06a1b8ab1bf96701e93fd5107f45",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1795405039,
-        "narHash": "sha256-CAX9hUi9DD5U9SXljyFnKyYQIy/P6Pasa0U9BeyXgzI=",
+        "lastModified": 1795501904,
+        "narHash": "sha256-NJKNS6ZcQYfMxQUd/44bjbA1SsKb4VAtL1UiZB0EZlE=",
         "owner": "mangowm",
         "repo": "mango",
-        "rev": "dda83d956fbf06afe3a0810ac4fc44d58bb40985",
+        "rev": "b68b5d8b8ed6064839788b7e38460a5728055036",
         "type": "github"
       },
       "original": {
@@ -354,11 +354,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1795258312,
-        "narHash": "sha256-IEuDsf80ubivfpidbRsIm30HVo7PZIdZt1stRsbaY4Y=",
+        "lastModified": 1795370043,
+        "narHash": "sha256-s/0jq8usZtLVOolYBwmyUmd3JsfAu7w3FU+a0dgMqSY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "94c3211b0ee8ba969a3f12eb4aff8ba0f72971dd",
+        "rev": "0dc498bfe49baeb18b0f9891e800b53bb2603193",
         "type": "github"
       },
       "original": {
