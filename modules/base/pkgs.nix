@@ -68,7 +68,6 @@ in
       environment.systemPackages = [
         pkgs.vesktop
         pkgs.prismlauncher
-        pkgs.gns3-gui
       ];
     };
 }
