@@ -140,17 +140,22 @@ PanelWindow {
             Item {
                 id: centerSection
 
+                readonly property real sidePadding: 16
+                readonly property real leftBound: leftSection.x + leftSection.width + sidePadding
+                readonly property real rightBound: rightSection.x - sidePadding
+                readonly property real availableWidth: Math.max(0, Math.floor(rightBound - leftBound))
+                readonly property real desiredWidth: Math.min(mprisModule.implicitWidth, availableWidth)
+
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.verticalCenterOffset: 1
-                anchors.horizontalCenter: parent.horizontalCenter
 
-                width: Math.min(barContent.width * 0.5, 500)
+                x: Math.max(leftBound, Math.min((barContent.width - desiredWidth) / 2, rightBound - desiredWidth))
+                width: desiredWidth
                 height: parent.height
 
                 BarMedia {
                     id: mprisModule
                     anchors.fill: parent
-                    anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
 

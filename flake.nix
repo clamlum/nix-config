@@ -2,8 +2,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -22,18 +23,6 @@
 
     not-quite-tiny-dfr.url = "git+ssh://git@github.com/clamlum/not-quite-tiny-dfr.git";
 
-    x1e-nixos.url = "git+https://git.scug.io/nikkuss/x1e-nixos.git";
-
-    custom-pkgs = {
-      url = "git+https://git.scug.io/nikkuss/pkgs.git?rev=16337d91437112608a4ac8c079f1539d58a86d51";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    surface-firmware = {
-      url = "path:/etc/nixos-firmware";
-      flake = false;
-    };
-
     kopuz = {
       url = "github:kopuz-org/kopuz";
     };
@@ -48,28 +37,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    niri-spicy-src = {
-      url = "github:losnoco/niri/spicy-main";
-      flake = false;
-    };
-    smithay-spicy-src = {
-      url = "github:losnoco/smithay/spicy-master";
-      flake = false;
-    };
-
-    xwayland-satellite = {
-      url = "github:supreeeme/xwayland-satellite";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     mangowm = {
       url = "github:mangowm/mango/wl-only";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,202 +44,10 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nix-darwin,
-      ...
-    }@inputs:
-    let
-      mkSystem = nixpkgs.lib.nixosSystem;
-      username = "clamt";
-    in
-    {
-      nixosConfigurations = {
-        nixos =
-          let
-            device = "nixos";
-          in
-          mkSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit device username;
-              inherit (inputs) nixpkgs-stable self;
-              inherit inputs;
-            };
-            modules = [
-              ./modules
-              ./modules/devices/pc
-              ./modules/apps
-              ./modules/shell
-              ./modules/desktops/niri
-              ./modules/desktops/mango
-              ./modules/desktops/kde
-              ./modules/services
-              ./modules/desktops/dm
-              inputs.lanzaboote.nixosModules.lanzaboote
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
-                  extraSpecialArgs = {
-                    inherit device username self;
-                  };
-                };
-              }
-            ];
-          };
-
-        asahi =
-          let
-            device = "asahi";
-          in
-          mkSystem {
-            system = "aarch64-linux";
-            specialArgs = {
-              device = device;
-              inherit username;
-              inherit (inputs) nixpkgs-stable self;
-              inherit inputs;
-            };
-            modules = [
-              ./modules
-              ./modules/devices/asahi
-              ./modules/apps
-              ./modules/shell
-              ./modules/desktops/niri
-              ./modules/services
-              ./modules/desktops/dm
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
-                  extraSpecialArgs = {
-                    inherit device username self;
-                  };
-                };
-              }
-            ];
-          };
-
-        surface =
-        let
-          device = "surface";
-        in
-        mkSystem {
-          system = "aarch64-linux";
-          specialArgs = {
-            device = device;
-            inherit username;
-            inherit (inputs) nixpkgs-stable self;
-            inherit inputs;
-          };
-          modules = [
-            ./modules
-            ./modules/devices/surface
-            ./modules/apps
-            ./modules/shell
-            ./modules/desktops/niri
-            ./modules/services
-            ./modules/desktops/dm
-            inputs.x1e-nixos.nixosModules.default
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
-                extraSpecialArgs = {
-                  inherit device username self;
-                };
-              };
-            }
-          ];
-        };
-
-        wsl =
-          let
-            device = "wsl";
-          in
-          mkSystem {
-            system = "aarch64-linux";
-            specialArgs = {
-              device = device;
-              inherit username;
-              inherit (inputs) self;
-              inherit inputs;
-            };
-            modules = [
-              ./modules
-
-              ./modules/devices/wsl
-
-              ./modules/shell
-              ./modules/services
-              inputs.nixos-wsl.nixosModules.default
-              inputs.home-manager.nixosModules.home-manager
-            ];
-          };
-
-        laptop =
-          let
-            device = "laptop";
-          in
-          mkSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              device = device;
-              inherit username;
-              inherit (inputs) nixpkgs-stable self;
-              inherit inputs;
-            };
-            modules = [
-              ./modules
-              ./modules/devices/laptop
-              ./modules/apps
-              ./modules/shell
-              ./modules/desktops/niri
-              ./modules/services
-              ./modules/desktops/dm
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.extraSpecialArgs = {
-                  inherit device username self;
-                };
-              }
-            ];
-          };
-      };
-
-      darwinConfigurations.macbook =
-        let
-          device = "macbook";
-        in
-        nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = {
-            inherit device;
-            inherit username;
-            inherit (inputs) nixpkgs-stable self;
-            inherit inputs;
-          };
-          modules = [
-            ./modules
-            ./modules/devices/macbook
-            ./modules/apps
-            ./modules/shell
-            ./modules/services/fonts.nix
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit device username self;
-                };
-              };
-            }
-          ];
-        };
-
-      diskoConfigurations.disko = import ./disko.nix;
-    };
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      inputs.import-tree ./modules
+    );
 
   nixConfig = {
     experimentalFeatures = [

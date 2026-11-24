@@ -1,25 +1,23 @@
+{ config, ... }:
 {
-  pkgs,
-  lib,
-  device,
-  ...
-}:
+  flake.modules.generic.fonts =
+    { pkgs, ... }:
+    {
+      fonts.packages = with pkgs; [
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        noto-fonts-color-emoji
 
-lib.mkMerge [
-  {
-    fonts.packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-color-emoji
+        nerd-fonts.noto
+        nerd-fonts.dejavu-sans-mono
+        nerd-fonts.jetbrains-mono
+      ];
+    };
 
-      nerd-fonts.noto
-      nerd-fonts.dejavu-sans-mono
-      nerd-fonts.jetbrains-mono
-    ];
-  }
+  flake.modules.nixos.fonts = {
+    imports = [ config.flake.modules.generic.fonts ];
 
-  (lib.optionalAttrs (device != "macbook") {
     fonts = {
       enableDefaultPackages = true;
 
@@ -47,5 +45,5 @@ lib.mkMerge [
         };
       };
     };
-  })
-]
+  };
+}

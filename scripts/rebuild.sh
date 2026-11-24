@@ -49,7 +49,6 @@ GC=0
 FLAKE="$HOME/nix-config"
 ACTION="switch"
 OUTPUT=$(hostname)
-OS="$(uname -s)"
 
 while getopts ":huigf:a:o:" opt; do
     case "$opt" in
@@ -101,21 +100,8 @@ if [[ "$UPGRADE" -eq 1 ]]; then
     git -C "$FLAKE" pull
 fi
 
-case "$OS" in
-    Darwin)
-        echo "==> Running on macOS"
-        OUTPUT="macbook"
-        COMMAND=(nh darwin)
-        ;;
-    Linux)
-        echo "==> Running on Linux"
-        COMMAND=(nh os)
-        ;;
-    *)
-        echo "Unknown OS: $OS"
-        exit 1
-        ;;
-esac
+
+COMMAND=(nh os)
 
 echo "Using output: $OUTPUT"
 

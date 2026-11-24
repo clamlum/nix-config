@@ -6,18 +6,20 @@ Item {
     id: root
     implicitHeight: Theme.barHeight
 
-    property int maxTitleLength: 60
-    property int maxArtistLength: 60
-
-    function _clip(s, max) {
-        const str = (s || "").toString();
-        return max > 0 && str.length > max ? str.slice(0, max - 1) + "…" : str;
-    }
-
-    readonly property string title: _clip(Services.Mpris.title, maxTitleLength)
-    readonly property string artist: _clip(Services.Mpris.artist, maxArtistLength)
-
+    readonly property string title: (Services.Mpris.title || "").toString()
+    readonly property string artist: (Services.Mpris.artist || "").toString()
     readonly property string trackText: title && artist ? (title + " - " + artist) : (title || artist || "")
+
+    readonly property bool hasIcon: Services.Mpris.icon !== ""
+    readonly property bool hasText: trackText !== ""
+    readonly property real minTextWidth: 20
+
+    readonly property real iconWidth: hasIcon ? Math.ceil(iconText.implicitWidth) : 0
+    readonly property real fullTextWidth: hasText ? Math.ceil(trackLabel.implicitWidth) : 0
+    readonly property real spacingWidth: (hasIcon && hasText) ? row.spacing : 0
+    readonly property real availableTextWidth: Math.max(0, Math.floor(width) - iconWidth - spacingWidth)
+
+    implicitWidth: iconWidth + spacingWidth + fullTextWidth
 
     Row {
         id: row
@@ -25,7 +27,8 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         Text {
-            visible: Services.Mpris.icon !== ""
+            id: iconText
+            visible: root.hasIcon && Math.floor(root.width) >= root.iconWidth
             text: Services.Mpris.icon
             color: Theme.text
             font.pixelSize: 16
@@ -33,7 +36,11 @@ Item {
             anchors.verticalCenterOffset: -2
         }
         Text {
-            text: trackText
+            id: trackLabel
+            visible: root.hasText && root.availableTextWidth >= Math.min(root.fullTextWidth, root.minTextWidth)
+            width: Math.min(root.fullTextWidth, root.availableTextWidth)
+            text: root.trackText
+            elide: Text.ElideRight
             color: Theme.text
             font { pixelSize: 14; family: Theme.font; bold: true }
             anchors.verticalCenter: parent.verticalCenter
@@ -45,7 +52,8 @@ Item {
         width: row.width
         y: -7
         height: parent.height + 16
-        hoverEnabled: true
+        enabled: row.width > 0
+        hoverEnabled: enabled
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         onClicked: event => {
