@@ -98,35 +98,53 @@ in
     {
       config,
       lib,
+      options,
       pkgs,
       _class,
       ...
     }:
+    let
+      hasZshPackageOption = _class == "nixos" && (options.programs.zsh ? package);
+    in
     {
       imports = [
         topConfig.flake.wrappers.zsh.install
       ];
 
-      wrappers.zsh = {
-        enable = true;
-      }
-      // lib.optionalAttrs (_class == "nixos") {
-        asSystemDefault = true;
-      };
+      config = lib.mkMerge [
+        {
+          wrappers.zsh = {
+            enable = true;
+          }
+          // lib.optionalAttrs (_class == "nixos") {
+            asSystemDefault = true;
+          };
 
-      environment.systemPackages = [
-        pkgs.lsd
-        pkgs.bat
-        pkgs.zoxide
-        pkgs.file
-        pkgs.nh
-        pkgs.tmux
+          environment.systemPackages = [
+            pkgs.lsd
+            pkgs.bat
+            pkgs.zoxide
+            pkgs.file
+            pkgs.nh
+            pkgs.tmux
+          ];
+        }
+        (lib.optionalAttrs (_class == "nixos") {
+          programs.zsh = {
+            enableGlobalCompInit = false;
+          }
+          // lib.optionalAttrs hasZshPackageOption {
+            package = config.wrappers.zsh.wrapper;
+          };
+        })
+        (lib.mkIf (_class == "nixos" && !hasZshPackageOption) {
+          environment.systemPackages = [
+            (lib.hiPrio config.wrappers.zsh.wrapper)
+          ];
+          environment.shells = [
+            "${config.wrappers.zsh.wrapper}/bin/zsh"
+          ];
+        })
       ];
-    }
-    // lib.optionalAttrs (_class == "nixos") {
-      programs.zsh = {
-        package = config.wrappers.zsh.wrapper;
-        enableGlobalCompInit = false;
-      };
     };
 }
