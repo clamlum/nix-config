@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795385658,
-        "narHash": "sha256-boPmaYTtheIPdmcRIzPCkvdo7OzBdFMPR7RMGVj3us4=",
+        "lastModified": 1795664849,
+        "narHash": "sha256-xVcFw2NhfaHYPEqGcEvrhxqS9m686mXGK9FIp9ebzWg=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "22142b67aff1bf0ada5c384974f05524f3980b14",
+        "rev": "193fc37ecc8793da8b6bb5dd6d16a1746c9c44ac",
         "type": "github"
       },
       "original": {
@@ -24,8 +24,8 @@
     "asahi-firmware": {
       "flake": false,
       "locked": {
-        "lastModified": 1787282518,
-        "narHash": "sha256-dBbT+gb06tWWUvOwcDyXdxCNjajtBx8wwbCFCNntlDk=",
+        "lastModified": 1787546558,
+        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
         "path": "/etc/nixos-firmware",
         "type": "path"
       },
@@ -214,11 +214,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795366757,
-        "narHash": "sha256-Tp4Kh4R7ID1f2mMCDlb2PiFQ/DZZsnXB2u2juWN+TT4=",
+        "lastModified": 1795748630,
+        "narHash": "sha256-J1iQ1QMnkFwZFXnlPt2t3Qx7TsGjw08/0L3QMqNt+Wg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b8140d21fa0a70b1b38c2ed29853dfe686234a6",
+        "rev": "54f903fdaaf5d5720ed36706fe75332af69eb793",
         "type": "github"
       },
       "original": {
@@ -250,11 +250,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1795469315,
-        "narHash": "sha256-6qL8ZwFFJUCnq1J2Ws8lIaq2OVD171WvvVGEd4IO374=",
+        "lastModified": 1795779468,
+        "narHash": "sha256-b+VFTnEnuUZK2xZR9hO0aODYPKw3teKoSrvbWLhvX8I=",
         "owner": "kopuz-org",
         "repo": "kopuz",
-        "rev": "fe612590c0fe06a1b8ab1bf96701e93fd5107f45",
+        "rev": "5cf0d36b9d40e724fb3f0cfea4086131b16bd74c",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1795501904,
-        "narHash": "sha256-NJKNS6ZcQYfMxQUd/44bjbA1SsKb4VAtL1UiZB0EZlE=",
+        "lastModified": 1795778843,
+        "narHash": "sha256-2D2UD7dAJKO3uGAlCFbohYQj71ntAfNvmGkKu0+dAKs=",
         "owner": "mangowm",
         "repo": "mango",
-        "rev": "b68b5d8b8ed6064839788b7e38460a5728055036",
+        "rev": "41148b6d720337b8232d300393e7f89d1877fe06",
         "type": "github"
       },
       "original": {
