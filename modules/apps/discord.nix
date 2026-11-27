@@ -9,7 +9,7 @@
             owner = "Vendicated";
             repo = "Vencord";
             rev = "main";
-            hash = "sha256-L+E/SPVbl/+K6bwC11tkWUYdkKZ8b3K+Dtp6TidLBuw=";
+            hash = "sha256-dpaRjHgVEv4nT/C1VAzaPV+L2PXWN+pLz5+sOlmZB+s=";
           };
         in
         {
