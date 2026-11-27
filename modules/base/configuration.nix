@@ -2,10 +2,16 @@
   flake.modules.nixos.configuration =
     { config, ... }:
     {
-      nix.settings.trusted-users = [
-        "root"
-        "@wheel"
-      ];
+      nix.settings = {
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
+        extra-substituters = [ "https://cache.clamlum.com" ];
+        extra-trusted-public-keys = [
+          "cache.clamlum.com-1:8FNflsyvXRtarHntCPX5SGPyvXo/ESXgnauOfv0P2Pw="
+        ];
+      };
 
       networking.networkmanager.enable = true;
 
