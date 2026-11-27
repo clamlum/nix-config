@@ -22,6 +22,7 @@ in
         # Apps & Terminals
         generic.zed
         generic.kopuz
+        nixos.ladybird
         nixos.wezterm
         nixos.android
         nixos.gaming
