@@ -24,5 +24,7 @@
       hardware.amdgpu.overdrive.enable = true;
 
       hardware.amdgpu.overdrive.ppfeaturemask = "0xffffffff";
+
+      programs.coolercontrol.enable = true;
     };
 }
