@@ -10,7 +10,7 @@
           owner = "OpenMouse-Project";
           repo = "OpenMouse-Bridge";
           rev = "main";
-          hash = "sha256-op68IMnGEDFuDCOzdU5lqqTG22Eje94CnwSCiavMOYg=";
+          hash = "sha256-2ft2cBu3O23+07NHcQ0ngA+3ZqNx+NoquEvN64auNB8=";
         };
 
         cargoLock.lockFile = "${src}/Cargo.lock";
