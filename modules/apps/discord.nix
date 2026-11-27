@@ -25,14 +25,26 @@
           };
         }
       );
+
+      discord = pkgs.discord.override {
+        inherit vencord;
+        withVencord = true;
+        withOpenASAR = true;
+      };
+
+      discord-wrapped = pkgs.symlinkJoin {
+        name = "discord-wrapped";
+        paths = [ discord ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/discord --add-flags "--enable-blink-features=MiddleClickAutoscroll"
+          wrapProgram $out/bin/Discord --add-flags "--enable-blink-features=MiddleClickAutoscroll"
+        '';
+      };
     in
     {
       environment.systemPackages = [
-        (pkgs.discord.override {
-          inherit vencord;
-          withVencord = true;
-          withOpenASAR = true;
-        })
+        discord-wrapped
       ];
     };
 }
